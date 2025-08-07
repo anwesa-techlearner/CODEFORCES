@@ -1,0 +1,16 @@
+import java.util.Scanner;
+ 
+public class CapitalizeWord {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String word = scanner.nextLine();
+        if (word.length() > 0) {
+            String capitalizedWord = Character.toUpperCase(word.charAt(0)) + word.substring(1);
+            System.out.println(capitalizedWord);
+        } else {
+            System.out.println(word);
+        }
+ 
+        scanner.close();
+    }
+}
