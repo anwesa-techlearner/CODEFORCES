@@ -1,0 +1,44 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+        // Read n and t
+        String line = br.readLine();
+        while (line != null && line.trim().isEmpty()) line = br.readLine();
+        if (line == null) return;
+        StringTokenizer st = new StringTokenizer(line);
+        int n = Integer.parseInt(st.nextToken());
+        int t = Integer.parseInt(st.nextToken());
+
+        // Read initial arrangement s
+        String s = br.readLine();
+        while (s != null && s.trim().isEmpty()) s = br.readLine();
+        if (s == null) s = "";
+
+        char[] arr = s.toCharArray();
+
+        // Simulate for t seconds
+        for (int step = 0; step < t; step++) {
+            // We need to consider non-overlapping swaps in a single second.
+            // Scan from left to right and swap "BG" -> "GB" when found, skipping the next position after a swap.
+            int i = 0;
+            while (i < n - 1) {
+                if (arr[i] == 'B' && arr[i + 1] == 'G') {
+                    // Swap
+                    arr[i] = 'G';
+                    arr[i + 1] = 'B';
+                    i += 2; // skip the next position
+                } else {
+                    i++;
+                }
+            }
+        }
+
+        System.out.println(new String(arr));
+    }
+}
