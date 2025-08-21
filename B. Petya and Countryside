@@ -1,0 +1,41 @@
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int[] heights = new int[n];
+        for (int i = 0; i < n; i++) {
+            heights[i] = scanner.nextInt();
+        }
+
+        int maxWateredSections = 0;
+
+        for (int i = 0; i < n; i++) {
+            int currentWatered = 1;
+
+            for (int j = i + 1; j < n; j++) {
+                if (heights[j] <= heights[j - 1]) {
+                    currentWatered++;
+                } else {
+                    break;
+                }
+            }
+
+            for (int j = i - 1; j >= 0; j--) {
+                if (heights[j] <= heights[j + 1]) {
+                    currentWatered++;
+                } else {
+                    break;
+                }
+            }
+
+            if (currentWatered > maxWateredSections) {
+                maxWateredSections = currentWatered;
+            }
+        }
+        
+        System.out.println(maxWateredSections);
+        scanner.close();
+    }
+}
