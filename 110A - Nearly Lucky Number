@@ -1,0 +1,32 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String nStr = br.readLine().trim();
+
+        // Count lucky digits in n
+        int luckyDigitCount = 0;
+        for (int i = 0; i < nStr.length(); i++) {
+            char c = nStr.charAt(i);
+            if (c == '4' || c == '7') {
+                luckyDigitCount++;
+            }
+        }
+
+        // A number is nearly lucky if the count of lucky digits is itself a lucky number
+        String countStr = Integer.toString(luckyDigitCount);
+        boolean isLucky = countStr.length() > 0;
+        for (int i = 0; i < countStr.length(); i++) {
+            char d = countStr.charAt(i);
+            if (d != '4' && d != '7') {
+                isLucky = false;
+                break;
+            }
+        }
+
+        System.out.println(isLucky ? "YES" : "NO");
+    }
+}
