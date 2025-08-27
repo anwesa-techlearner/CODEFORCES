@@ -1,0 +1,31 @@
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args) throws Exception {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String line;
+        line = br.readLine();
+        int n = Integer.parseInt(line.trim());
+
+        line = br.readLine();
+        String[] parts = line.trim().split("\\s+");
+        int[] p = new int[n];
+        for (int i = 0; i < n; i++) {
+            p[i] = Integer.parseInt(parts[i]);
+        }
+
+        int[] giver = new int[n]; // giver[i] = who gave to friend (i+1)
+        for (int i = 0; i < n; i++) {
+            int recipientIndex = p[i] - 1; // convert to 0-based
+            giver[recipientIndex] = i + 1; // giver is 1-based
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            if (i > 0) sb.append(' ');
+            sb.append(giver[i]);
+        }
+        System.out.println(sb.toString());
+    }
+}
