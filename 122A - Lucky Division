@@ -1,0 +1,48 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class AlmostLucky {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        sc.close();
+
+        List<Integer> luckyNumbers = generateLuckyNumbersUpTo(1000);
+
+        boolean isAlmostLucky = false;
+        for (int ln : luckyNumbers) {
+            if (ln != 0 && n % ln == 0) {
+                isAlmostLucky = true;
+                break;
+            }
+        }
+
+        System.out.println(isAlmostLucky ? "YES" : "NO");
+    }
+
+    private static List<Integer> generateLuckyNumbersUpTo(int limit) {
+        List<Integer> list = new ArrayList<>();
+        List<Integer> queue = new ArrayList<>();
+        queue.add(4);
+        queue.add(7);
+
+        int idx = 0;
+        while (idx < queue.size()) {
+            int val = queue.get(idx++);
+            if (val <= limit) {
+                list.add(val);
+                int next1 = val * 10 + 4;
+                int next2 = val * 10 + 7;
+                if (next1 <= limit * 10) queue.add(next1);
+                if (next2 <= limit * 10) queue.add(next2);
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+        for (int x : list) {
+            if (x <= limit) result.add(x);
+        }
+        return result;
+    }
+}
